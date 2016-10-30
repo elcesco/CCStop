@@ -14,15 +14,49 @@
 #ifndef DEVICE_RAW_H
 #define DEVICE_RAW_H
 
+#define MY_DEST_MAC0 00
+#define MY_DEST_MAC1 11
+#define MY_DEST_MAC2 22
+#define MY_DEST_MAC3 33
+#define MY_DEST_MAC4 44
+#define MY_DEST_MAC5 55
+
+#define TTL 128
+
+
 #include <iostream>
+#include <string.h>
+#include <sys/ioctl.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <net/if.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
+#include <netinet/udp.h>
+#include <netinet/ether.h>
+
 #include "Devices.h"
 
 class Device_RAW : public Devices {
+
 public:
     Device_RAW();
     virtual ~Device_RAW();
-        
+
+    virtual int addFilter();
+    virtual int removeFilter();
+    
+    virtual int open();
+    virtual int close();
+    
+    virtual int send();
+    virtual int receive();
+    
+    virtual bool isConnected();
+    
+    
 private:
+    unsigned short csum(unsigned short *buf, int nwords);
 
 };
 

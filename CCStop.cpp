@@ -32,7 +32,9 @@ int main(int argc, char** argv) {
 
     unique_ptr<CCStop> ccmain(new CCStop());
     
-    unique_ptr<Device_RAW> device(new Device_RAW());
+    unique_ptr<Device_RAW> cc_device(new Device_RAW());
+    
+    cc_device->open();
     
     while(false);
     
