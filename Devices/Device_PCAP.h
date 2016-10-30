@@ -14,10 +14,12 @@
 #ifndef DEVICE_PCAP_H
 #define DEVICE_PCAP_H
 
-class Device_PCAP {
+#include <iostream>
+#include "Devices.h"
+
+class Device_PCAP: public Devices {
 public:
     Device_PCAP();
-    Device_PCAP(const Device_PCAP& orig);
     virtual ~Device_PCAP();
 private:
 

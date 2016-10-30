@@ -14,11 +14,11 @@
 #include "Device_PCAP.h"
 
 Device_PCAP::Device_PCAP() {
+    std::cout << "enter Device_PCAP::Device_PCAP()" << std::endl;
 }
 
-Device_PCAP::Device_PCAP(const Device_PCAP& orig) {
-}
 
 Device_PCAP::~Device_PCAP() {
+    std::cout << "enter Device_PCAP::~Device_PCAP()" << std::endl;
 }
 

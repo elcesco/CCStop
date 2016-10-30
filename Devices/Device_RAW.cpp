@@ -14,11 +14,11 @@
 #include "Device_RAW.h"
 
 Device_RAW::Device_RAW() {
-}
-
-Device_RAW::Device_RAW(const Device_RAW& orig) {
+    std::cout << "enter Device_RAW::Device_RAW()" << std::endl;
 }
 
 Device_RAW::~Device_RAW() {
+    std::cout << "enter Device_RAW::~Device_RAW()" << std::endl;
+    
 }
 

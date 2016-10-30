@@ -18,6 +18,10 @@
 #include <iostream>
 #include <memory>
 
+#include "Devices/Device_RAW.h"
+#include "Devices/Device_PCAP.h"
+#include "Devices/Device_TUN.h"
+
 class CCStop {
 public:
     CCStop();

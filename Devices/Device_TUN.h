@@ -14,10 +14,12 @@
 #ifndef DEVICE_TUN_H
 #define DEVICE_TUN_H
 
-class Device_TUN {
+#include <iostream>
+#include "Devices.h"
+
+class Device_TUN: public Devices {
 public:
     Device_TUN();
-    Device_TUN(const Device_TUN& orig);
     virtual ~Device_TUN();
 private:
 

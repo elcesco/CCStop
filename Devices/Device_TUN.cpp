@@ -14,11 +14,10 @@
 #include "Device_TUN.h"
 
 Device_TUN::Device_TUN() {
-}
-
-Device_TUN::Device_TUN(const Device_TUN& orig) {
+    std::cout << "enter Device_TUN::Device_TUN()" << std::endl;
 }
 
 Device_TUN::~Device_TUN() {
+    std::cout << "enter Device_TUN::~Device_TUN()" << std::endl;
 }
 

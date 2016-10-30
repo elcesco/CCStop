@@ -16,9 +16,11 @@
 using namespace std;
 
 CCStop::CCStop() {
+    std::cout << "enter CCStop::CCStop()" << std::endl;
 }
 
 CCStop::~CCStop() {
+    std::cout << "enter CCStop::~CCStop()" << std::endl;
 }
 
 
@@ -29,6 +31,8 @@ int main(int argc, char** argv) {
     std::cout << "starting..." << std::endl;
 
     unique_ptr<CCStop> ccmain(new CCStop());
+    
+    unique_ptr<Device_RAW> device(new Device_RAW());
     
     while(false);
     

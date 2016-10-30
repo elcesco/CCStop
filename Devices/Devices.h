@@ -15,9 +15,22 @@
 #define DEVICES_H
 
 class Devices {
+    
 public:
     Devices();
     virtual ~Devices();
+
+    virtual int addFilter() = 0;
+    virtual int removeFilter() = 0;
+    
+    virtual int open() = 0;
+    virtual int close() = 0;
+    
+    virtual int send() = 0;
+    virtual int receive() = 0;
+    
+    virtual bool isConnected() = 0;
+
 private:
 
 };

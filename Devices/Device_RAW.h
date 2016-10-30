@@ -14,11 +14,14 @@
 #ifndef DEVICE_RAW_H
 #define DEVICE_RAW_H
 
-class Device_RAW {
+#include <iostream>
+#include "Devices.h"
+
+class Device_RAW : public Devices {
 public:
     Device_RAW();
-    Device_RAW(const Device_RAW& orig);
     virtual ~Device_RAW();
+        
 private:
 
 };
