@@ -11,8 +11,6 @@
  * Created on October 30, 2016, 11:43 AM
  */
 
-#include <cstdlib>
-#include <iostream>
 #include "CCStop.h"
 
 using namespace std;
@@ -20,12 +18,8 @@ using namespace std;
 CCStop::CCStop() {
 }
 
-CCStop::CCStop(const CCStop& orig) {
-}
-
 CCStop::~CCStop() {
 }
-
 
 
 /*
@@ -34,7 +28,9 @@ CCStop::~CCStop() {
 int main(int argc, char** argv) {
     std::cout << "starting..." << std::endl;
 
-    while(true);
+    unique_ptr<CCStop> ccmain(new CCStop());
+    
+    while(false);
     
     std::cout << "done." << std::endl;
     
