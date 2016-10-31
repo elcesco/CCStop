@@ -26,7 +26,7 @@ public:
     virtual int open() = 0;
     virtual int close() = 0;
     
-    virtual int send() = 0;
+    virtual int send(char* sendbuf, int len) = 0;
     virtual int receive() = 0;
     
     virtual bool isConnected() = 0;

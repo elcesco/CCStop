@@ -25,7 +25,6 @@ Device_RAW::~Device_RAW() {
 }
 
 int Device_RAW::open() {
-    int sockfd;
     
     // Open RAW socket to send on
     if ((sockfd = socket(AF_PACKET, SOCK_RAW, IPPROTO_RAW)) == -1) {
@@ -35,7 +34,6 @@ int Device_RAW::open() {
     }
     
     // Get the index of the interface to send on
-    struct ifreq if_idx;
     memset(&if_idx, 0, sizeof(struct ifreq));
     strncpy(if_idx.ifr_name, "ens33", IFNAMSIZ-1);
     if(ioctl(sockfd, SIOCGIFINDEX, &if_idx) < 0) {
@@ -92,7 +90,6 @@ int Device_RAW::open() {
     
     //iph->saddr = inet_addr(inet_ntoa(((struct sockaddr_in *) &if_ip.ifr_addr)->sin_addr));
     iph->saddr = inet_addr("192.168.0.222");
-    
     iph->daddr = inet_addr("192.168.0.111");
     
     tx_len += sizeof(struct iphdr);
@@ -117,20 +114,7 @@ int Device_RAW::open() {
     iph->check = csum((unsigned short *)(sendbuf + sizeof(struct ether_header)), sizeof(struct iphdr)/2);
     
     //Send the raw ethernet packet
-    struct sockaddr_ll socket_address;
-    
-    socket_address.sll_ifindex = if_idx.ifr_ifindex;
-    socket_address.sll_halen = ETH_ALEN;
-    
-    socket_address.sll_addr[0] = MY_DEST_MAC0;
-    socket_address.sll_addr[1] = MY_DEST_MAC1;
-    socket_address.sll_addr[2] = MY_DEST_MAC2;
-    socket_address.sll_addr[3] = MY_DEST_MAC3;
-    socket_address.sll_addr[4] = MY_DEST_MAC4;
-    socket_address.sll_addr[5] = MY_DEST_MAC5;
-
-    if (sendto(sockfd, sendbuf, tx_len, 0, (struct sockaddr*) &socket_address, sizeof(struct sockaddr_ll)) < 0 )
-        std::cout << "send failed" << std::endl;
+    send(sendbuf, tx_len);
 }
 
 int Device_RAW::close() {
@@ -149,9 +133,32 @@ int Device_RAW::removeFilter() {
     return -1;
 }
     
-int Device_RAW::send() {
+int Device_RAW::send(char* sendbuf, int len){
     
-    return -1;
+    //Destination address
+    struct sockaddr_ll socket_address;
+    
+    //Index of the network device
+    socket_address.sll_ifindex = if_idx.ifr_ifindex;
+    
+    //Adress length
+    socket_address.sll_halen = ETH_ALEN;
+    
+    //Destination MAC address
+    socket_address.sll_addr[0] = MY_DEST_MAC0;
+    socket_address.sll_addr[1] = MY_DEST_MAC1;
+    socket_address.sll_addr[2] = MY_DEST_MAC2;
+    socket_address.sll_addr[3] = MY_DEST_MAC3;
+    socket_address.sll_addr[4] = MY_DEST_MAC4;
+    socket_address.sll_addr[5] = MY_DEST_MAC5;
+    
+    //Send the raw ethernet packet
+    if (sendto(sockfd, sendbuf, len, 0, (struct sockaddr*) &socket_address, sizeof(struct sockaddr_ll)) < 0 ) {
+        std::cout << "send failed" << std::endl;
+        return -1;
+    }
+    
+    return 0;
 }
  
 int Device_RAW::receive() {

@@ -49,13 +49,16 @@ public:
     virtual int open();
     virtual int close();
     
-    virtual int send();
+    int send(char* sendbuf, int len);
     virtual int receive();
     
     virtual bool isConnected();
     
     
 private:
+    int sockfd;
+    struct ifreq if_idx;
+    
     unsigned short csum(unsigned short *buf, int nwords);
 
 };
