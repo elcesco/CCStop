@@ -22,6 +22,8 @@
 #include "Devices/Device_PCAP.h"
 #include "Devices/Device_TUN.h"
 
+#include "ConfigurationManager.h"
+
 class CCStop {
 public:
     CCStop();
